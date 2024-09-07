@@ -1,0 +1,155 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    08/17/2024  21:06:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\HOC\8051\KEIL_C_V5\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\Delay.obj TO .\Objects\giao tiep voi nut nhan 5 PRI
+>> NT (.\Listings\giao tiep voi nut nhan 5.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\Delay.obj (DELAY)
+  C:\HOC\8051\KEIL_C_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\HOC\8051\KEIL_C_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\giao tiep voi nut nhan 5 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+                    000AH     0016H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     002AH     UNIT         ?PR?MAIN?MAIN
+            CODE    00B9H     0023H     UNIT         ?PR?PRESSBTN?MAIN
+            CODE    00DCH     0020H     UNIT         ?PR?_DELAY_MS?DELAY
+            CODE    00FCH     0003H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\giao tiep voi nut nhan 5 (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  0008H    0001H
+  +--> ?PR?PRESSBTN?MAIN
+
+?PR?PRESSBTN?MAIN              0009H    0001H
+  +--> ?PR?_DELAY_MS?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\giao tiep voi nut nhan 5 (MAIN)
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  08/17/2024  21:06:41  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:00B9H         PUBLIC        pressBTN
+  C:008FH         PUBLIC        main
+  B:0020H.0       PUBLIC        pressFlag
+  B:0090H.0       PUBLIC        BTN
+  -------         PROC          PRESSBTN
+  -------         DO            
+  D:0009H         SYMBOL        i
+  -------         ENDDO         
+  C:00B9H         LINE#         9
+  C:00B9H         LINE#         10
+  C:00B9H         LINE#         12
+  C:00BCH         LINE#         13
+  C:00BCH         LINE#         14
+  C:00C3H         LINE#         15
+  C:00C6H         LINE#         16
+  C:00C6H         LINE#         17
+  C:00C9H         LINE#         18
+  C:00C9H         LINE#         19
+  C:00CBH         LINE#         20
+  C:00CEH         LINE#         21
+  C:00CEH         LINE#         22
+  C:00CEH         LINE#         24
+  C:00CEH         LINE#         25
+  C:00D0H         LINE#         26
+  C:00D0H         LINE#         27
+  C:00D9H         LINE#         28
+  C:00DBH         LINE#         29
+  -------         ENDPROC       PRESSBTN
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        count
+  -------         ENDDO         
+  C:008FH         LINE#         31
+  C:008FH         LINE#         32
+  C:008FH         LINE#         33
+  C:0092H         LINE#         34
+  C:0094H         LINE#         35
+  C:0094H         LINE#         36
+  C:0094H         LINE#         37
+  C:0097H         LINE#         38
+  C:0097H         LINE#         39
+  C:009DH         LINE#         40
+  C:009DH         LINE#         41
+  C:009FH         LINE#         42
+  C:00A4H         LINE#         43
+  C:00A4H         LINE#         44
+  C:00A7H         LINE#         45
+  C:00A7H         LINE#         46
+  C:00A7H         LINE#         47
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  08/17/2024  21:06:41  PAGE 3
+
+
+  C:00ADH         LINE#         48
+  C:00ADH         LINE#         49
+  C:00AFH         LINE#         50
+  C:00B2H         LINE#         51
+  C:00B4H         LINE#         52
+  C:00B4H         LINE#         53
+  C:00B7H         LINE#         54
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:00DCH         PUBLIC        _Delay_ms
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         ENDDO         
+  C:00DCH         LINE#         5
+  C:00DCH         LINE#         6
+  C:00DCH         LINE#         8
+  C:00E6H         LINE#         9
+  C:00E6H         LINE#         10
+  C:00F4H         LINE#         11
+  C:00FBH         LINE#         12
+  -------         ENDPROC       _DELAY_MS
+  -------         ENDMOD        DELAY
+
+Program Size: data=11.1 xdata=0 code=255
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

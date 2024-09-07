@@ -1,0 +1,55 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/30/2024 10:34:48 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          #include "C:\hoc\8051\bai_tap\Library\KeyPad 4x4\KeyPad4x4.h"
+   4          #include "port.h"
+   5          
+   6          unsigned char code Code7Seg[] = {0xC0, 0x79, 0x24, 0x30, 0x19, 0x12, 0x02, 0x78, 0x00, 0x10};
+   7          
+   8          
+   9          void main()
+  10          {
+  11   1        unsigned char key = 0xFF, tmp = 0xFF;
+  12   1        while(1)
+  13   1        {
+  14   2          key = KeyPress();
+  15   2          if(key != 0xFF)  // Ki?m tra xem có phím nào du?c nh?n không
+  16   2          {
+  17   3            tmp = key;
+  18   3          }
+  19   2      
+  20   2          // Hi?n th? mã phím trên 7 do?n
+  21   2          LED_PORT = Code7Seg[tmp/10];
+  22   2          Led_1 = 0;
+  23   2          Delay_ms(1);
+  24   2          Led_1 = 1;
+  25   2      
+  26   2          LED_PORT = Code7Seg[tmp%10];
+  27   2          Led_2 = 0;
+  28   2          Delay_ms(1);
+  29   2          Led_2 = 1;
+  30   2        }
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     69    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

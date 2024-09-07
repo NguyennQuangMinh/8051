@@ -1,0 +1,8 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD4.obj",
+".\Objects\LunarCalendar.obj",
+".\Objects\Rtc_Ds1307.obj",
+".\Objects\Soft_I2C.obj" 
+TO ".\Objects\lich van nien su dung ngat ngoai va ru ngu vi dieu khien" 
+PRINT(".\Listings\lich van nien su dung ngat ngoai va ru ngu vi dieu khien.m51") RAMSIZE(256) 

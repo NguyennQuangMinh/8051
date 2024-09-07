@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\ngat_timer0_choptatLed" 
+PRINT(".\Listings\ngat_timer0_choptatLed.m51") RAMSIZE(256) 

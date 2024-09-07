@@ -1,0 +1,85 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/27/2024 19:04:26 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include"reg51.h"
+   2          #include<intrins.h>
+   3          
+   4          sbit SRCLK=P3^6;
+   5          sbit RCLK=P3^5;
+   6          sbit SER=P3^4;
+   7          
+   8          void Hc595SendByte(unsigned char dat)
+   9          {
+  10   1        unsigned char a;
+  11   1        SRCLK=0;
+  12   1        RCLK=0;
+  13   1        for(a=0;a<8;a++)
+  14   1        {
+  15   2          SER=dat>>7;
+  16   2          dat<<=1;
+  17   2      
+  18   2          SRCLK=1;
+  19   2          _nop_();
+  20   2          _nop_();
+  21   2          SRCLK=0;  
+  22   2        }
+  23   1      
+  24   1        RCLK=1;
+  25   1        _nop_();
+  26   1        _nop_();
+  27   1        RCLK=0;
+  28   1      }
+  29          
+  30          void Delay10ms(unsigned int c)  
+  31          {
+  32   1          unsigned char a,b;
+  33   1          for(;c>0;c--)
+  34   1              for(b=38;b>0;b--)
+  35   1                  for(a=130;a>0;a--);
+  36   1      }
+  37          void main(void)
+  38          {
+  39   1        unsigned char i,num;
+  40   1         while(1)
+  41   1         {
+  42   2          num=0x01;
+  43   2          for(i=0;i<8;i++)
+  44   2          {
+  45   3            P0=~num;
+  46   3            Hc595SendByte(0xff);
+  47   3            num<<=1;
+  48   3            Delay10ms(50);
+  49   3          }
+  50   2          num=0x01;
+  51   2          for(i=0;i<8;i++)
+  52   2          {       
+  53   3            Hc595SendByte(num);
+  54   3            P0=0x00;
+  55   3            num<<=1;
+C51 COMPILER V9.60.7.0   MAIN                                                              08/27/2024 19:04:26 PAGE 2   
+
+  56   3            Delay10ms(50);
+  57   3          }
+  58   2         
+  59   2         }
+  60   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    115    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

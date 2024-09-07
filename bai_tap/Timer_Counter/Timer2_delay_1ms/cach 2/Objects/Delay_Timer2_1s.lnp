@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\Delay_Timer2_1s" 
+PRINT(".\Listings\Delay_Timer2_1s.m51") RAMSIZE(256) 

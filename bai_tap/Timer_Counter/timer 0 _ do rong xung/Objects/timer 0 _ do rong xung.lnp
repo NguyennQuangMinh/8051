@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\LCD4.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\timer 0 _ do rong xung" 
+PRINT(".\Listings\timer 0 _ do rong xung.m51") RAMSIZE(256) 

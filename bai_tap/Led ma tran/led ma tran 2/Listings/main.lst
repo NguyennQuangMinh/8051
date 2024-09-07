@@ -1,0 +1,63 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/21/2024 17:59:05 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          // dem tu 0 -> 9
+   3          
+   4          #include "main.h"
+   5          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   6          
+   7          unsigned char code Font5x7[10][7] = { {0x0E, 0x11, 0x13, 0x15, 0x19, 0x11, 0x0E},   // Font cua so 0
+   8                                                {0x1F, 0x04, 0x04, 0x04, 0x14, 0x0C, 0x04},   // Font cua so 1
+   9                                                {0x1F, 0x10, 0x08, 0x04, 0x12, 0x11, 0x0E},   // Font cua so 2
+  10                                                {0x0E, 0x11, 0x02, 0x04, 0x02, 0x11, 0x0E},   // Font cua so 3
+  11                                                {0x02, 0x02, 0x02, 0x1F, 0x0A, 0x06, 0x02},   // Font cua so 4
+  12                                                {0x1F, 0x01, 0x01, 0x1F, 0x10, 0x10, 0x1F},   // Font cua so 5
+  13                                                {0x1F, 0x11, 0x11, 0x1F, 0x10, 0x10, 0x1F},   // Font cua so 6
+  14                                                {0x04, 0x04, 0x04, 0x04, 0x02, 0x11, 0x1F},   // Font cua so 7
+  15                                                {0x0E, 0x11, 0x1B, 0x0E, 0x11, 0x11, 0x0E},   // Font cua so 8
+  16                                                {0x1F, 0x01, 0x01, 0x1F, 0x11, 0x11, 0x1F},   // Font cua so 9
+  17                                              };
+  18          void main()
+  19          {
+  20   1        unsigned int i,j,cnt;
+  21   1        while(1)
+  22   1        {
+  23   2          for(cnt=0; cnt<10; cnt++) // dem tu 0 -> 9
+  24   2          {
+  25   3            for(i=0; i<143; i++) // giu so do trong vong 1 giay sau do moi dem tang fo thuc hien quet led het moi l
+             -an la 1ms*7lan = 7ms => 1000ms tuoong duong voi lap lai 143 lan (1000/7)
+  26   3            {
+  27   4              // quet led hien thi so
+  28   4              for(j=0; j<7; j++)
+  29   4              {
+  30   5                P0 = Font5x7[cnt][j];
+  31   5                P3 = 0x01<<j;
+  32   5                Delay_ms(1);
+  33   5                P3 = 0x00;
+  34   5              }   
+  35   4            }   
+  36   3          }
+  37   2        }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    131    ----
+   CONSTANT SIZE    =     70    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

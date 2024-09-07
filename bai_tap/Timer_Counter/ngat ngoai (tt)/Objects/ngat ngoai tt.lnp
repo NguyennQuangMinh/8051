@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\ngat ngoai tt" 
+PRINT(".\Listings\ngat ngoai tt.m51") RAMSIZE(256) 

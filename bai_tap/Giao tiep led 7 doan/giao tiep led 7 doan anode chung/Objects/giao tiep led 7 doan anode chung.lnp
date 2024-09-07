@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\giao tiep led 7 doan anode chung" 
+PRINT(".\Listings\giao tiep led 7 doan anode chung.m51") RAMSIZE(256) 

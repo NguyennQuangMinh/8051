@@ -1,0 +1,103 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/04/2024  15:08:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\HOC\8051\KEIL_C_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\Delay_Timer2_1s PRINT (.\Listings\Delay_Timer2_1s
+>> .m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  C:\HOC\8051\KEIL_C_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Delay_Timer2_1s (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0019H     UNIT         ?PR?MAIN?MAIN
+            CODE    001CH     0018H     UNIT         ?PR?DELAY_TIMER2_1S?MAIN
+            CODE    0034H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Delay_Timer2_1s (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?DELAY_TIMER2_1S?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Delay_Timer2_1s (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:001CH         PUBLIC        Delay_Timer2_1s
+  D:00CBH         PUBLIC        RCAP2H
+  D:00CAH         PUBLIC        RCAP2L
+  C:0003H         PUBLIC        main
+  B:00C8H.7       PUBLIC        TF2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  15:08:26  PAGE 2
+
+
+  D:00CDH         PUBLIC        TH2
+  D:00CCH         PUBLIC        TL2
+  B:00C8H.2       PUBLIC        TR2
+  D:00C9H         PUBLIC        T2MOD
+  D:00C8H         PUBLIC        T2CON
+  -------         PROC          DELAY_TIMER2_1S
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:001CH         LINE#         3
+  C:001CH         LINE#         4
+  C:001CH         LINE#         6
+  C:001EH         LINE#         7
+  C:0021H         LINE#         8
+  C:0021H         LINE#         9
+  C:0024H         LINE#         10
+  C:0026H         LINE#         11
+  C:0031H         LINE#         12
+  C:0033H         LINE#         13
+  -------         ENDPROC       DELAY_TIMER2_1S
+  -------         PROC          MAIN
+  C:0003H         LINE#         15
+  C:0003H         LINE#         16
+  C:0003H         LINE#         18
+  C:0006H         LINE#         19
+  C:0008H         LINE#         23
+  C:000BH         LINE#         24
+  C:000EH         LINE#         27
+  C:0011H         LINE#         28
+  C:0014H         LINE#         30
+  C:0014H         LINE#         31
+  C:0014H         LINE#         32
+  C:0017H         LINE#         33
+  C:001AH         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=64
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

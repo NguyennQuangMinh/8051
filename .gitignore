@@ -1,0 +1,8 @@
+*.log
+*.exe 
+*.msi
+2 Driver/
+4 phan mem Progisp 1.72/
+*.config
+*.xlsx
+Keil_C_v5/

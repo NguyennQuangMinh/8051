@@ -1,0 +1,156 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/24/2024 22:44:47 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          // lich van nien
+   3          
+   4          #include "main.h"
+   5          #include "port.h"
+   6          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   7          #include "C:\hoc\8051\bai_tap\Library\LCD16x2_4bit\LCD4.h"
+   8          #include "C:\hoc\8051\bai_tap\Library\RTC DS1307\Rtc_Ds1307.h"
+   9          #include "C:\hoc\8051\bai_tap\Library\Soft I2C\Soft_I2c.h"
+  10          #include "C:\hoc\8051\bai_tap\Library\Lunar Calculator\LunarCalendar.h"
+  11          
+  12          unsigned char *code Days[] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+  13          bit buttonFlag = 0;  // bien kiem tra trang thai cu nut nhan
+  14          
+  15          //ISR: interrupt service routine: chuong trinh con phuc vu ngat
+  16          void EX1_ISR(void) interrupt 2 // tro chuot vao interrupt sau do nhan F1 de xem ngat dang dung la so may
+  17          {
+  18   1      
+  19   1      }
+  20          
+  21          void main()
+  22          {
+  23   1        unsigned char Hour, Minute, Second, Mode, Day, Date, Month, Year;
+  24   1        unsigned char SolarDate, SolarMonth;
+  25   1        char SolarYear;
+  26   1        
+  27   1        // bien co cua nut nhan
+  28   1        bit btnPressed = 0;
+  29   1        
+  30   1        Lcd_Init();
+  31   1        Ds1307_Init();
+  32   1        Soft_I2c_Init();
+  33   1        
+  34   1        //tao xung ghi du lieu voi toc do 1Mhz tu ds1307 ra chan SOUT
+  35   1        Ds1307_Write(0x07, 0x10);
+  36   1        
+  37   1        // ngat canh xuong ( co 2 loai ngat la ngat canh xuong va ngat o muc 0, vo ngat o muc 0 thi IT1 = 0)
+  38   1        IT1 = 1;
+  39   1        //cho phep ngat tai INT1 (cho phep ngat tai ITN0 thi EX0 =1 )
+  40   1        EX1 = 1;
+  41   1        //cho phep ngat toan bo
+  42   1        EA = 1;
+  43   1        
+  44   1        while(1)
+  45   1        {
+  46   2          //doc gia tri gio, phut, giay tu ds1307
+  47   2          Ds1307_Read_Time(&Hour, &Minute, &Second, &Mode);
+  48   2          /* vi doan ma o duoi chay rat nhanh nen neu chay tren mach that thi LCD se chop tat lien tuc
+  49   2              do vay, can mot bien luu trang thai de LCD hoat dong on dinh
+  50   2          */
+  51   2      
+  52   2          //hien thi gio
+  53   2          Lcd_Chr(1, 5, Hour/10 + 0x30);
+  54   2          Lcd_Chr_Cp(Hour%10+0x30);
+C51 COMPILER V9.60.7.0   MAIN                                                              08/24/2024 22:44:47 PAGE 2   
+
+  55   2          
+  56   2          Lcd_Chr_Cp(':');
+  57   2          
+  58   2          //hien thi phut
+  59   2          Lcd_Chr_Cp(Minute/10 + 0x30);
+  60   2          Lcd_Chr_Cp(Minute%10 + 0x30);
+  61   2          
+  62   2          Lcd_Chr_Cp(':');
+  63   2          
+  64   2          //hien thi giay
+  65   2          Lcd_Chr_Cp(Second/10 + 0x30);
+  66   2          Lcd_Chr_Cp(Second%10 + 0x30); 
+  67   2      
+  68   2          // doc gia tri ngay thang nam tu ds1307
+  69   2          Ds1307_Read_Date(&Day, &Date, &Month, &Year);
+  70   2          
+  71   2          // Kiem tra neu nut nhan duoc nhan
+  72   2          if(BTN == 0 && !btnPressed ) 
+  73   2          {
+  74   3            Delay_ms(20);  // chong doi phim
+  75   3            if(BTN == 0)
+  76   3            {
+  77   4              buttonFlag = !buttonFlag;  // Dao trang thai cua bien co
+  78   4              btnPressed = 1;  // dat trang thai nut nhan dang duoc nhan
+  79   4            }
+  80   3          }
+  81   2          if(BTN == 1) 
+  82   2          {
+  83   3            btnPressed = 0;  // Reset trang thai nut nhan khi nut nhan duoc nha ra
+  84   3          }
+  85   2      
+  86   2          // Display based on the button state
+  87   2          if(buttonFlag == 0)
+  88   2          {
+  89   3            // Hien thi lich duong
+  90   3            //Xoa man hinh
+  91   3            Lcd_Out(2, 1, "                ");
+  92   3            // Hien thi o dong 2 cot 2, thu
+  93   3            Lcd_Out(2, 2, Days[Day-1]);
+  94   3            Lcd_Chr_Cp(' ');
+  95   3            //Hien thi ngay
+  96   3            Lcd_Chr_Cp(Date/10 + 0x30);
+  97   3            Lcd_Chr_Cp(Date%10 + 0x30);
+  98   3            Lcd_Chr_Cp('/');
+  99   3            // Hien thi thang
+ 100   3            Lcd_Chr_Cp(Month/10 + 0x30);
+ 101   3            Lcd_Chr_Cp(Month%10 + 0x30);
+ 102   3            Lcd_Out_Cp("/20");
+ 103   3            //Hien thi nam
+ 104   3            Lcd_Chr_Cp(Year/10 + 0x30);
+ 105   3            Lcd_Chr_Cp(Year%10 + 0x30);            
+ 106   3          }
+ 107   2          else
+ 108   2          { 
+ 109   3            // Hien thi lich am
+ 110   3            Solar2Lunar(Date, Month, Year, &SolarDate, &SolarMonth, &SolarYear);
+ 111   3            Lcd_Out(2, 1, "Lunar:");
+ 112   3            //Hien thi ngay
+ 113   3            Lcd_Chr_Cp(SolarDate/10 + 0x30);
+ 114   3            Lcd_Chr_Cp(SolarDate%10 + 0x30);
+ 115   3            Lcd_Chr_Cp('/');
+ 116   3            //Hien thi thang
+C51 COMPILER V9.60.7.0   MAIN                                                              08/24/2024 22:44:47 PAGE 3   
+
+ 117   3            Lcd_Chr_Cp(SolarMonth/10 + 0x30);
+ 118   3            Lcd_Chr_Cp(SolarMonth%10 + 0x30);
+ 119   3            Lcd_Chr_Cp('/');
+ 120   3            //Hien thi nam
+ 121   3            Lcd_Chr_Cp((Year+2000)/1000 + 0x30);
+ 122   3            Lcd_Chr_Cp((Year+2000)/100%10 + 0x30);
+ 123   3            Lcd_Chr_Cp((Year+2000)/10%10 + 0x30);
+ 124   3            Lcd_Chr_Cp((Year+2000)%10 + 0x30);
+ 125   3          }
+ 126   2          PCON |=0x01;
+ 127   2        }
+ 128   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    583    ----
+   CONSTANT SIZE    =     77    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

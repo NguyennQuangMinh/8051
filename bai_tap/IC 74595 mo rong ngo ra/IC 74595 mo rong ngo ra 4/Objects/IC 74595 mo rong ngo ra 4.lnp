@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\IE74595.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\IC 74595 mo rong ngo ra 4" 
+PRINT(".\Listings\IC 74595 mo rong ngo ra 4.m51") RAMSIZE(256) 

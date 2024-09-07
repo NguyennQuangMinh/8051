@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\DAC_1_machR2R" 
+PRINT(".\Listings\DAC_1_machR2R.m51") RAMSIZE(256) 

@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\Timer0_bo dem counter" 
+PRINT(".\Listings\Timer0_bo dem counter.m51") RAMSIZE(256) 

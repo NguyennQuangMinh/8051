@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\SangDanTatDan8Led" 
+PRINT(".\Listings\SangDanTatDan8Led.m51") RAMSIZE(256) 

@@ -1,0 +1,8 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD4.obj",
+".\Objects\Soft_I2C.obj",
+".\Objects\Rtc_Ds1307.obj",
+".\Objects\LunarCalendar.obj" 
+TO ".\Objects\Lich van nien su dung LCD16x2 4bit" 
+PRINT(".\Listings\Lich van nien su dung LCD16x2 4bit.m51") RAMSIZE(256) 

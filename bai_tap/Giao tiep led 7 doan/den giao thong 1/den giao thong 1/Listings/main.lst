@@ -1,0 +1,79 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/18/2024 14:58:43 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          
+   4          #define chuc P2
+   5          #define donvi P3
+   6          
+   7          // mac theo kieu sink dong nen muc kich hoat la 0
+   8          sbit red = P0^0;
+   9          sbit yellow = P0^1;
+  10          sbit green = P0^2;
+  11          
+  12          //khai bao ma cua led 7 doan
+  13          unsigned char code Code7Seg[] = {0xC0, 0x79, 0x24, 0x30, 0x19, 0x12, 0x02, 0x78, 0x00, 0x10};
+  14          void main()
+  15          {
+  16   1        signed char i;
+  17   1        while(1)
+  18   1        {
+  19   2          //den do
+  20   2          red = 0;
+  21   2          yellow = 1;
+  22   2          green = 1;
+  23   2          for(i=20; i>=0; i--)
+  24   2          {
+  25   3            chuc = Code7Seg[i/10];
+  26   3            donvi = Code7Seg[i%10];
+  27   3            Delay_ms(1000);
+  28   3          }
+  29   2          
+  30   2          //den xanh
+  31   2          red = 1;
+  32   2          yellow = 1;
+  33   2          green = 0;
+  34   2          for(i=15; i>=0; i--)
+  35   2          {
+  36   3            chuc = Code7Seg[i/10];
+  37   3            donvi = Code7Seg[i%10];
+  38   3            Delay_ms(1000);
+  39   3          }
+  40   2          
+  41   2          //den vang
+  42   2          red = 1;
+  43   2          yellow = 0;
+  44   2          green = 1;
+  45   2          for(i=5; i>=0; i--)
+  46   2          {
+  47   3            chuc = Code7Seg[i/10];
+  48   3            donvi = Code7Seg[i%10];
+  49   3            Delay_ms(1000);
+  50   3          }
+  51   2        }
+  52   1      }
+  53          
+
+C51 COMPILER V9.60.7.0   MAIN                                                              08/18/2024 14:58:43 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    254    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

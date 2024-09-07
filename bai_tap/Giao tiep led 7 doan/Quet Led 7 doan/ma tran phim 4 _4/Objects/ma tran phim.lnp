@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\KeyPad4x4.obj" 
+TO ".\Objects\ma tran phim" 
+PRINT(".\Listings\ma tran phim.m51") RAMSIZE(256) 

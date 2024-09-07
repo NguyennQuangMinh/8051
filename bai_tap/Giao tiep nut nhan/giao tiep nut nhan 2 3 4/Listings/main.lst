@@ -1,0 +1,52 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/17/2024 14:41:26 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include"main.h"
+   2          #include"C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          
+   4          // ket noi cac nut nhan
+   5          sbit BTN1 = P1^0;
+   6          sbit BTN2 = P1^1;
+   7          
+   8          // ket noi cac Led
+   9          sbit Led = P2^0;
+  10          
+  11          void main()
+  12          {
+  13   1        Led = 0;
+  14   1        while(1)
+  15   1        {
+  16   2          if(BTN1 == 0)
+  17   2          {
+  18   3            Delay_ms(20);// chong doi phim
+  19   3            Led = !Led; // dao trang thai cu led
+  20   3            while(BTN1 == 0); // dung tai day cho toi khi nut nhan duoc tha ra de tranh truong hop giu phim và Led 
+             -dao trang thai lien tuc
+  21   3          }
+  22   2          if(BTN2 == 0)
+  23   2          {
+  24   3            Led = 0;
+  25   3          }
+  26   2        }
+  27   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     24    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

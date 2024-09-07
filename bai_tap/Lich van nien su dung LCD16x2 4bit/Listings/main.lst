@@ -1,0 +1,140 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/23/2024 18:54:03 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          // lich van nien
+   3          
+   4          #include "main.h"
+   5          #include "port.h"
+   6          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   7          #include "C:\hoc\8051\bai_tap\Library\LCD16x2_4bit\LCD4.h"
+   8          #include "C:\hoc\8051\bai_tap\Library\RTC DS1307\Rtc_Ds1307.h"
+   9          #include "C:\hoc\8051\bai_tap\Library\Soft I2C\Soft_I2c.h"
+  10          #include "C:\hoc\8051\bai_tap\Library\Lunar Calculator\LunarCalendar.h"
+  11          
+  12          unsigned char *code Days[] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+  13          bit buttonFlag = 0;  // Button state flag
+  14          
+  15          void main()
+  16          {
+  17   1        unsigned char Hour, Minute, Second, Mode, Day, Date, Month, Year, old_second;
+  18   1        unsigned char SolarDate, SolarMonth;
+  19   1        char SolarYear;
+  20   1        bit btnPressed = 0;
+  21   1        
+  22   1        Lcd_Init();
+  23   1        Ds1307_Init();
+  24   1        Soft_I2c_Init();
+  25   1        
+  26   1        while(1)
+  27   1        {
+  28   2          //doc gia tri gio, phut, giay tu ds1307
+  29   2          Ds1307_Read_Time(&Hour, &Minute, &Second, &Mode);
+  30   2          /* vi doan ma o duoi chay rat nhanh nen neu chay tren mach that thi LCD se chop tat lien tuc
+  31   2              do vay, can mot bien luu trang thai de LCD hoat dong on dinh
+  32   2          */
+  33   2          if(old_second != Second)
+  34   2          {
+  35   3            old_second = Second;
+  36   3            //hien thi gio
+  37   3            Lcd_Chr(1, 5, Hour/10 + 0x30);
+  38   3            Lcd_Chr_Cp(Hour%10+0x30);
+  39   3            
+  40   3            Lcd_Chr_Cp(':');
+  41   3            
+  42   3            //hien thi phut
+  43   3            Lcd_Chr_Cp(Minute/10 + 0x30);
+  44   3            Lcd_Chr_Cp(Minute%10 + 0x30);
+  45   3            
+  46   3            Lcd_Chr_Cp(':');
+  47   3            
+  48   3            //hien thi giay
+  49   3            Lcd_Chr_Cp(Second/10 + 0x30);
+  50   3            Lcd_Chr_Cp(Second%10 + 0x30); 
+  51   3      
+  52   3            // doc gia tri ngay thang nam tu ds1307
+  53   3            Ds1307_Read_Date(&Day, &Date, &Month, &Year);
+  54   3            
+C51 COMPILER V9.60.7.0   MAIN                                                              08/23/2024 18:54:03 PAGE 2   
+
+  55   3            // Kiem tra neu nut nhan duoc nhan
+  56   3            if(BTN == 0 && !btnPressed ) 
+  57   3            {
+  58   4                Delay_ms(20);  // chong doi phim
+  59   4                if(BTN == 0)
+  60   4                {
+  61   5                    buttonFlag = !buttonFlag;  // Dao trang thai cua bien co
+  62   5                    btnPressed = 1;  // dat trang thai nut nhan dang duoc nhan
+  63   5                }
+  64   4            }
+  65   3            if(BTN == 1) 
+  66   3            {
+  67   4                btnPressed = 0;  // Reset trang thai nut nhan khi nut nhan duoc nha ra
+  68   4            }
+  69   3      
+  70   3            // Display based on the button state
+  71   3            if(buttonFlag == 0)
+  72   3            {
+  73   4                // Hien thi lich duong
+  74   4                //Xoa man hinh
+  75   4                Lcd_Out(2, 1, "                ");
+  76   4                // Hien thi o dong 2 cot 2, thu
+  77   4                Lcd_Out(2, 2, Days[Day-1]);
+  78   4                Lcd_Chr_Cp(' ');
+  79   4                //Hien thi ngay
+  80   4                Lcd_Chr_Cp(Date/10 + 0x30);
+  81   4                Lcd_Chr_Cp(Date%10 + 0x30);
+  82   4                Lcd_Chr_Cp('/');
+  83   4                // Hien thi thang
+  84   4                Lcd_Chr_Cp(Month/10 + 0x30);
+  85   4                Lcd_Chr_Cp(Month%10 + 0x30);
+  86   4                Lcd_Out_Cp("/20");
+  87   4                //Hien thi nam
+  88   4                Lcd_Chr_Cp(Year/10 + 0x30);
+  89   4                Lcd_Chr_Cp(Year%10 + 0x30);            
+  90   4            }
+  91   3            else
+  92   3            { 
+  93   4                // Hien thi lich am
+  94   4                Solar2Lunar(Date, Month, Year, &SolarDate, &SolarMonth, &SolarYear);
+  95   4                Lcd_Out(2, 1, "Lunar:");
+  96   4                //Hien thi ngay
+  97   4                Lcd_Chr_Cp(SolarDate/10 + 0x30);
+  98   4                Lcd_Chr_Cp(SolarDate%10 + 0x30);
+  99   4                Lcd_Chr_Cp('/');
+ 100   4                //Hien thi thang
+ 101   4                Lcd_Chr_Cp(SolarMonth/10 + 0x30);
+ 102   4                Lcd_Chr_Cp(SolarMonth%10 + 0x30);
+ 103   4                Lcd_Chr_Cp('/');
+ 104   4                //Hien thi nam
+ 105   4                Lcd_Chr_Cp((Year+2000)/1000 + 0x30);
+ 106   4                Lcd_Chr_Cp((Year+2000)/100%10 + 0x30);
+ 107   4                Lcd_Chr_Cp((Year+2000)/10%10 + 0x30);
+ 108   4                Lcd_Chr_Cp((Year+2000)%10 + 0x30);
+ 109   4            }
+ 110   3          }
+ 111   2        }
+ 112   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    581    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              08/23/2024 18:54:03 PAGE 3   
+
+   CONSTANT SIZE    =     77    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

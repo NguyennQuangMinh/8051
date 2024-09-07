@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\DichBit3" 
+PRINT(".\Listings\DichBit3.m51") RAMSIZE(256) 

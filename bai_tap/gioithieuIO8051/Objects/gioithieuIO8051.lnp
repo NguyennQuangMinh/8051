@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\gioithieuIO8051" 
+PRINT(".\Listings\gioithieuIO8051.m51") RAMSIZE(256) 

@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\giao tiep relay 2" 
+PRINT(".\Listings\giao tiep relay 2.m51") RAMSIZE(256) 

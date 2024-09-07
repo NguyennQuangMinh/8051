@@ -1,0 +1,107 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/22/2024 09:29:43 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          
+   4          // khai bao ket noi chan LCD
+   5          #define LCD_DATA P3
+   6          sbit LCD_RS = P2^0;
+   7          sbit LCD_EN = P2^1;
+   8          
+   9          //ham ghi lenh
+  10          void LCD_CMD(unsigned char cmd)
+  11          {
+  12   1          // cho chan RS xuong muc thap de LCD hieu la ta muon ghi lenh
+  13   1          LCD_RS = 0;
+  14   1          // DATA = lenh
+  15   1          LCD_DATA = cmd;
+  16   1          //tao xung tren chan EN de cho phep ghi du lieu bang cach bat keo xuong 0 sau do bat len 1 hoac nguoc la
+             -i
+  17   1          LCD_EN = 0;
+  18   1          LCD_EN = 1;
+  19   1          // voi nhung lenh nho hon 0x02 thi Delay khoang 1.53s, con lon hon se Delay khoang 37us do vay ta chon 2
+             -ms cho lenh <=0x02 va 1ms cho nhung lenh >0x02
+  20   1          if(cmd <= 0x02)
+  21   1          {
+  22   2            Delay_ms(2);
+  23   2          }
+  24   1          else
+  25   1          {
+  26   2            Delay_ms(1);
+  27   2          }
+  28   1      }
+  29          
+  30          // ham ghi 1 ky tu len LCD
+  31          void LCD_CHR_CP(char c) //Current Position
+  32          {
+  33   1          // cho chan RS len muc cao de LCD hieu la ta muon ghi du lieu len LCD
+  34   1          LCD_RS = 1;
+  35   1          // DATA = lenh
+  36   1          LCD_DATA = c;
+  37   1          //tao xung tren chan EN de cho phep ghi du lieu bang cach bat keo xuong 0 sau do bat len 1 hoac nguoc la
+             -i
+  38   1          LCD_EN = 0;
+  39   1          LCD_EN = 1;
+  40   1          Delay_ms(1);
+  41   1      }
+  42          //ham ghi 1 chuoi ky tu len LCD
+  43          void LCD_OUT_CP(char *str)
+  44          {
+  45   1        unsigned char i = 0;
+  46   1        while( *(str+i ) != 0 )
+  47   1        {
+  48   2          LCD_CHR_CP( *(str+i) );
+  49   2          i++;
+  50   2        }
+  51   1      
+C51 COMPILER V9.60.7.0   MAIN                                                              08/22/2024 09:29:43 PAGE 2   
+
+  52   1      }
+  53          void LCD_INIT() 
+  54          {
+  55   1        // khoi tao LCD che do 8 bit, 2 dong
+  56   1        LCD_CMD(0x30);
+  57   1        Delay_ms(5);
+  58   1        LCD_CMD(0x30);
+  59   1        Delay_ms(1);
+  60   1        LCD_CMD(0x30);
+  61   1        
+  62   1        LCD_CMD(0x38);// khoi tao che do 8 bit, 2 dong
+  63   1        LCD_CMD(0x01);// xoa man hinh
+  64   1        LCD_CMD(0x0C);// bat che do hien thi LCD, Tat con tro man hinh
+  65   1      
+  66   1      }
+  67          void main()
+  68          {
+  69   1        LCD_INIT();
+  70   1        LCD_OUT_CP("123456"); // gui ky tu len dong 1
+  71   1        LCD_CMD(0xC0);//di chuyen con tro sang dau dong 2
+  72   1        LCD_OUT_CP("LINE 2"); // gui ky tu len dong 2
+  73   1        while(1)
+  74   1        {
+  75   2        
+  76   2        }
+  77   1      }
+  78          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    148    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,106 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/01/2024 11:01:36 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          // mach dem san pham su dung counter
+   3          
+   4          #include "main.h"
+   5          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   6          
+   7          sbit btn_reset = P1^0;
+   8          
+   9          unsigned char code Code7seg[] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x00, 0x10}; 
+  10          
+  11          void Display(unsigned int c)
+  12          {
+  13   1        unsigned char chuc_ngan, ngan, tram, chuc, donvi;
+  14   1        chuc_ngan = c/10000;
+  15   1        ngan = (c%10000)/1000;
+  16   1        tram = (c%1000)/100;
+  17   1        chuc = (c%100)/10;
+  18   1        donvi = c%10;
+  19   1        
+  20   1        P2_0 = 0;
+  21   1        P0 = Code7seg[chuc_ngan];
+  22   1        Delay_ms(1);
+  23   1        P2_0 = 1;
+  24   1        
+  25   1        P2_1 = 0;
+  26   1        P0 = Code7seg[ngan];
+  27   1        Delay_ms(1);
+  28   1        P2_1 = 1;
+  29   1        
+  30   1        P2_2 = 0;
+  31   1        P0 = Code7seg[tram];
+  32   1        Delay_ms(1);
+  33   1        P2_2 = 1;
+  34   1        
+  35   1        P2_3 = 0;
+  36   1        P0 = Code7seg[chuc];
+  37   1        Delay_ms(1);
+  38   1        P2_3 = 1;
+  39   1        
+  40   1        P2_4 = 0;
+  41   1        P0 = Code7seg[donvi];
+  42   1        Delay_ms(1);
+  43   1        P2_4 = 1; 
+  44   1      }
+  45          
+  46          void main()
+  47          {
+  48   1        unsigned char high, low;
+  49   1        unsigned int number;
+  50   1        //thiet lap che do lam viec timer 0 kieu bo dem counter 16bit
+  51   1        TMOD &= 0xF0;
+  52   1        TMOD |= 0x05;
+  53   1        TR0 = 1; //cho phep timer 0 dem
+  54   1        while(1)
+C51 COMPILER V9.60.7.0   MAIN                                                              09/01/2024 11:01:36 PAGE 2   
+
+  55   1        {
+  56   2          do
+  57   2          {     
+  58   3            high = TH0; // luu gia tri 4bit cao vao bien high
+  59   3            low = TL0;  // luu gia tri 4 bit thap vao bien low
+  60   3          }while(high != TH0);
+  61   2          
+  62   2          number = high; // luu gia tri thanh ghi TH0 vao 8 bit thap cua number
+  63   2          number <<= 8;  // dich 8 bit thap cua number len 8 bit vao
+  64   2          number|= low; // luu gia tri thanh ghi TL0 vao 8 bit thap cua number
+  65   2          
+  66   2          Display(number);
+  67   2          
+  68   2          if(btn_reset == 0)
+  69   2          {
+  70   3            Delay_ms(20);
+  71   3            TR0=0;
+  72   3            TH0=0;
+  73   3            TL0=0;
+  74   3          }
+  75   2          else
+  76   2          {
+  77   3            TR0 = 1;
+  78   3          }
+  79   2        }
+  80   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    245    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

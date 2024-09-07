@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 15:08:26 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          void Delay_Timer2_1s()
+   4          {
+   5   1        unsigned int i;
+   6   1        TR2 = 1; // timer 2 bat dau dem
+   7   1        for( i=0; i<20 ;i++) //thud hien vong lap 20 lan tuong duong voi 20 lan bao tran => 20*50ms = 1000ms
+   8   1        {
+   9   2          while(!TF2); //cho den khi timer 2 bao tran
+  10   2          TF2 = 0;     // tat co bao tran
+  11   2        }
+  12   1        TR2 = 0; //timer 2 dung dem
+  13   1      }
+  14          
+  15          void main()
+  16          {
+  17   1        //thiet lap timer 2 che do 16 bit tu dong nap lai
+  18   1        T2CON = 0x00; //xoa bo nho thanh ghi T2CON
+  19   1        T2MOD  = 0x00; // chon che do cho timer2
+  20   1        
+  21   1        //dem 50000 xung tuong ung voi 50ms se bi tran => 65536 - 50000 = 15536 => hex = 3CB0
+  22   1        // luu gia tri 8 bit cao vao 2 thanh ghi tu dong nap lai RCAP2H va 8 bit thap vao thanh ghi RCAP2l
+  23   1        RCAP2H = 0x3C;
+  24   1        RCAP2L = 0xB0;
+  25   1        
+  26   1        // luu gia tri 8 bit cao vao thanh ghi TH2 va TL2 
+  27   1        TH2 = 0x3C;
+  28   1        TL2 = 0xB0;
+  29   1        
+  30   1        while(1)
+  31   1        { 
+  32   2          P2 = ~P2;
+  33   2          Delay_Timer2_1s();
+  34   2        }
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     49    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

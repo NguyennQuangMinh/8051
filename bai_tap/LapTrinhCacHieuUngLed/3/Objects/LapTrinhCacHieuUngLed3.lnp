@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\LapTrinhCacHieuUngLed3" 
+PRINT(".\Listings\LapTrinhCacHieuUngLed3.m51") RAMSIZE(256) 

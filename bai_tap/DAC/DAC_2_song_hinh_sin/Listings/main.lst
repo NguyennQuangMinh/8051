@@ -1,0 +1,45 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/06/2024 20:39:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          // tao song hinh sin có chu ky T = 0.02s <=> 20ms
+   3          
+   4          #include "main.h"
+   5          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   6          
+   7          unsigned char code DACvalue[] = {128,168,202,231,245,255,245,231,202,168,128,87,53,24,10,0,10,24,53,87};
+   8          
+   9          void main()
+  10          {
+  11   1        unsigned int i;
+  12   1        while(1)
+  13   1        {
+  14   2          for(i=0; i<20; i++) // 1 chu ky là 20ms => lap 20 lan, moi lan Delay 1ms
+  15   2          {
+  16   3            P2 = DACvalue[i];
+  17   3            Delay_ms(1);
+  18   3          }
+  19   2        
+  20   2        }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     47    ----
+   CONSTANT SIZE    =     20    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,76 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/01/2024 16:37:03 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          #include "C:\hoc\8051\bai_tap\Library\LCD16x2_4bit\LCD4.h"
+   4          #include "port.h"
+   5          
+   6          void main()
+   7          {
+   8   1        unsigned int t, f;
+   9   1        
+  10   1        //khoi tao Lcd
+  11   1        Lcd_Init();
+  12   1        Lcd_Out(1,1,"T = ");
+  13   1        Lcd_Out(2,1,"f = ");
+  14   1        
+  15   1        //set mode cho timer 0 
+  16   1        TMOD &= 0xF0;
+  17   1        TMOD |= 0x09;
+  18   1        
+  19   1        while(1)
+  20   1        {
+  21   2          //gioi han luu gia tri la 65535 gia tri tuong duong voi 4byte
+  22   2          TH0 = 0;
+  23   2          TL0 = 0;
+  24   2          
+  25   2          while(INT0);    // bo qua xung muc 1 dau tien
+  26   2          while(!INT0);   // bo qua muc 0
+  27   2          TR0 = 1;        //cho phep luu gia tri vao thanh ghi TH0 va TL0
+  28   2          while(INT0);
+  29   2          TR0 =0;
+  30   2          
+  31   2          t = TH0;   // luu gia tri TH0 vao 4 bit thap cua bien t
+  32   2          t <<= 8;  // luu gia tri TH0 vao 4 bit cao cua bien t
+  33   2          t |= TL0; //luu gia tri TL0 vao 4 bit thap cua bien t
+  34   2          t *= 2;  //lay chu ki xung bang cach nhan doi do rong xung
+  35   2      
+  36   2          // +0x30 de doi gia tri tu char sang unikey
+  37   2          Lcd_Chr(1,5,t/10000 + 0x30);     // lay gia tri hang chuc nghin
+  38   2          Lcd_Chr_Cp(t%10000/1000 + 0x30); //lay gia tri hang nghin
+  39   2          Lcd_Chr_Cp(t%1000/100 + 0x30);  //lay gia tri hang tram
+  40   2          Lcd_Chr_Cp(t%100/10 + 0x30);   //lay gia tri hang chuc
+  41   2          Lcd_Chr_Cp(t%10 + 0x30);        // lay gia tri hang donvi
+  42   2          
+  43   2          f = 1000000 / t;    // do t dang tinh bang uS nen khi doi ra Hz lay 1/1uS = 1000000
+  44   2          Lcd_Chr(2,5,f/10000 + 0x30);      // lay gia tri hang chuc nghin
+  45   2          Lcd_Chr_Cp(f%10000/1000 + 0x30);  //lay gia tri hang nghin
+  46   2          Lcd_Chr_Cp(f%1000/100 + 0x30);     //lay gia tri hang tram
+  47   2          Lcd_Chr_Cp(f%100/10 + 0x30);      //lay gia tri han chuc
+  48   2          Lcd_Chr_Cp(f%10 + 0x30);          // lay gia tri hang don vi
+  49   2        }
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    372    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              09/01/2024 16:37:03 PAGE 2   
+
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

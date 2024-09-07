@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj" 
+TO ".\Objects\DAC_2_song_hinh_sin" 
+PRINT(".\Listings\DAC_2_song_hinh_sin.m51") RAMSIZE(256) 

@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\UartMode1.obj" 
+TO ".\Objects\vi dieu khien 2" 
+PRINT(".\Listings\vi dieu khien 2.m51") RAMSIZE(256) 
