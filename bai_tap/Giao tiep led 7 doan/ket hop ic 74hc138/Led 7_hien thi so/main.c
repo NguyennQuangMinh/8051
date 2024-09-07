@@ -6,7 +6,7 @@
 sbit LSA=P2^2;
 sbit LSB=P2^3;
 sbit LSC=P2^4;
-//RAM,ROM
+
 unsigned char code DIG_CODE[10]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f}; //ma led 7 thanh cathode
 
 void main(void)
@@ -16,6 +16,6 @@ void main(void)
 	LSC=0;
 	while(1)
 	{
-		GPIO_DIG=DIG_CODE[9];
+		GPIO_DIG=DIG_CODE[9]; //hien thi so 9
 	}				
 }

@@ -40,3 +40,4 @@ void main()
 		Delay_ms(500);
 	}
 }
+// sua P0 thanh P2 de su dung tren bo kit 8051 pro
