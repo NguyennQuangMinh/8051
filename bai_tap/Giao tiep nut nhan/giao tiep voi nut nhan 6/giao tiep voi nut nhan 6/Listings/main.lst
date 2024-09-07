@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              08/17/2024 17:23:38 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/07/2024 22:34:08 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   2          P2 = 0xF0;
   53   2          for(i=0; i<10; i++)
   54   2          {
-C51 COMPILER V9.60.7.0   MAIN                                                              08/17/2024 17:23:38 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/07/2024 22:34:08 PAGE 2   
 
   55   3            if(DelayChedo()) break;
   56   3            P2 = ~P2;
