@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\mo rong bo nho 2" 
+PRINT(".\Listings\mo rong bo nho 2.m51") RAMSIZE(256) 

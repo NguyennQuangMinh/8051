@@ -1,0 +1,247 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/09/2024  22:57:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\HOC\8051\KEIL_C_V5\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\Delay.obj, .\Objects\SPI.obj TO .\Objects\giao tiep
+>>  EEPROM 25LC256 phan 2 PRINT (.\Listings\giao tiep EEPROM 25LC256 phan 2.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\Delay.obj (DELAY)
+  .\Objects\SPI.obj (SPI)
+  C:\HOC\8051\KEIL_C_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\giao tiep EEPROM 25LC256 phan 2 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         _DATA_GROUP_
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     004AH     UNIT         ?PR?MAIN?MAIN
+            CODE    004DH     0031H     UNIT         ?PR?_EEPROM_25LCXXX_WRITE?MAIN
+            CODE    007EH     0020H     UNIT         ?PR?_DELAY_MS?DELAY
+            CODE    009EH     001EH     UNIT         ?PR?_EEPROM_25LCXXX_READ?MAIN
+            CODE    00BCH     0019H     UNIT         ?PR?_SOFT_SPI_WRITE?SPI
+            CODE    00D5H     0015H     UNIT         ?PR?SOFT_SPI_READ?SPI
+            CODE    00EAH     0011H     UNIT         ?PR?EEPROM_25LCXXX_WIP?MAIN
+            CODE    00FBH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0107H     0007H     UNIT         ?PR?SOFT_SPI_INIT?SPI
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\giao tiep EEPROM 25LC256 phan 2 (MAIN)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                          0008H    0002H
+  +--> ?PR?SOFT_SPI_INIT?SPI
+  +--> ?PR?_EEPROM_25LCXXX_WRITE?MAIN
+  +--> ?PR?_EEPROM_25LCXXX_READ?MAIN
+  +--> ?PR?_DELAY_MS?DELAY
+
+?PR?_EEPROM_25LCXXX_WRITE?MAIN         000AH    0003H
+  +--> ?PR?_SOFT_SPI_WRITE?SPI
+  +--> ?PR?EEPROM_25LCXXX_WIP?MAIN
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/09/2024  22:57:58  PAGE 2
+
+
+
+?PR?EEPROM_25LCXXX_WIP?MAIN            -----    -----
+  +--> ?PR?_SOFT_SPI_WRITE?SPI
+  +--> ?PR?SOFT_SPI_READ?SPI
+
+?PR?_EEPROM_25LCXXX_READ?MAIN          000AH    0002H
+  +--> ?PR?_SOFT_SPI_WRITE?SPI
+  +--> ?PR?SOFT_SPI_READ?SPI
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\giao tiep EEPROM 25LC256 phan 2 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0003H         PUBLIC        main
+  C:00EAH         PUBLIC        EEPROM_25LCxxx_WIP
+  B:00A0H.3       PUBLIC        SPI_CS
+  C:009EH         PUBLIC        _EEPROM_25LCxxx_Read
+  C:004DH         PUBLIC        _EEPROM_25LCxxx_Write
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         10
+  C:0003H         LINE#         11
+  C:0003H         LINE#         13
+  C:0006H         LINE#         22
+  C:000BH         LINE#         23
+  C:000BH         LINE#         24
+  C:0014H         LINE#         25
+  C:0025H         LINE#         27
+  C:0025H         LINE#         28
+  C:0025H         LINE#         30
+  C:002AH         LINE#         31
+  C:002AH         LINE#         32
+  C:0033H         LINE#         33
+  C:003AH         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         PROC          _EEPROM_25LCXXX_WRITE
+  D:000AH         SYMBOL        add
+  D:000CH         SYMBOL        b
+  C:004DH         LINE#         40
+  C:0053H         LINE#         41
+  C:0053H         LINE#         43
+  C:0055H         LINE#         44
+  C:005AH         LINE#         45
+  C:005CH         LINE#         48
+  C:005EH         LINE#         49
+  C:0063H         LINE#         50
+  C:0069H         LINE#         51
+  C:0070H         LINE#         52
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/09/2024  22:57:58  PAGE 3
+
+
+  C:0075H         LINE#         53
+  C:0077H         LINE#         55
+  C:007DH         LINE#         56
+  -------         ENDPROC       _EEPROM_25LCXXX_WRITE
+  -------         PROC          EEPROM_25LCXXX_WIP
+  -------         DO            
+  D:0007H         SYMBOL        result
+  -------         ENDDO         
+  C:00EAH         LINE#         59
+  C:00EAH         LINE#         60
+  C:00EAH         LINE#         62
+  C:00ECH         LINE#         63
+  C:00F1H         LINE#         64
+  C:00F4H         LINE#         65
+  C:00F6H         LINE#         66
+  C:00FAH         LINE#         67
+  -------         ENDPROC       EEPROM_25LCXXX_WIP
+  -------         PROC          _EEPROM_25LCXXX_READ
+  D:000AH         SYMBOL        add
+  -------         DO            
+  D:0007H         SYMBOL        b
+  -------         ENDDO         
+  C:009EH         LINE#         70
+  C:00A2H         LINE#         71
+  C:00A2H         LINE#         74
+  C:00A4H         LINE#         75
+  C:00A9H         LINE#         76
+  C:00AFH         LINE#         77
+  C:00B6H         LINE#         78
+  C:00B9H         LINE#         79
+  C:00BBH         LINE#         81
+  C:00BBH         LINE#         82
+  -------         ENDPROC       _EEPROM_25LCXXX_READ
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:007EH         PUBLIC        _Delay_ms
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         ENDDO         
+  C:007EH         LINE#         6
+  C:007EH         LINE#         7
+  C:007EH         LINE#         9
+  C:0088H         LINE#         10
+  C:0088H         LINE#         11
+  C:0096H         LINE#         12
+  C:009DH         LINE#         13
+  -------         ENDPROC       _DELAY_MS
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        SPI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/09/2024  22:57:58  PAGE 4
+
+
+  B:00A0H.2       PUBLIC        SPI_MISO
+  B:00A0H.1       PUBLIC        SPI_MOSI
+  C:00D5H         PUBLIC        Soft_SPI_Read
+  C:00BCH         PUBLIC        _Soft_SPI_Write
+  C:0107H         PUBLIC        Soft_SPI_Init
+  B:00A0H.3       PUBLIC        SPI_CS
+  B:00A0H.0       PUBLIC        SPI_SCLK
+  -------         PROC          SOFT_SPI_INIT
+  C:0107H         LINE#         12
+  C:0107H         LINE#         13
+  C:0107H         LINE#         14
+  C:0109H         LINE#         15
+  C:010BH         LINE#         16
+  C:010DH         LINE#         17
+  -------         ENDPROC       SOFT_SPI_INIT
+  -------         PROC          _SOFT_SPI_WRITE
+  D:0007H         SYMBOL        b
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:00BCH         LINE#         20
+  C:00BCH         LINE#         21
+  C:00BCH         LINE#         23
+  C:00BEH         LINE#         24
+  C:00BEH         LINE#         25
+  C:00C2H         LINE#         26
+  C:00C2H         LINE#         27
+  C:00C4H         LINE#         28
+  C:00C6H         LINE#         29
+  C:00C8H         LINE#         30
+  C:00C8H         LINE#         31
+  C:00CAH         LINE#         32
+  C:00CCH         LINE#         33
+  C:00D0H         LINE#         34
+  C:00D4H         LINE#         35
+  -------         ENDPROC       _SOFT_SPI_WRITE
+  -------         PROC          SOFT_SPI_READ
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0007H         SYMBOL        b
+  -------         ENDDO         
+  C:00D5H         LINE#         38
+  C:00D5H         LINE#         39
+  C:00D5H         LINE#         41
+  C:00D7H         LINE#         42
+  C:00D7H         LINE#         43
+  C:00DBH         LINE#         44
+  C:00DDH         LINE#         45
+  C:00E0H         LINE#         46
+  C:00E0H         LINE#         47
+  C:00E3H         LINE#         48
+  C:00E3H         LINE#         49
+  C:00E5H         LINE#         50
+  C:00E9H         LINE#         51
+  C:00E9H         LINE#         52
+  -------         ENDPROC       SOFT_SPI_READ
+  -------         ENDMOD        SPI
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/09/2024  22:57:58  PAGE 5
+
+
+
+Program Size: data=14.0 xdata=0 code=270
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

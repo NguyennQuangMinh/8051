@@ -1,0 +1,108 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/09/2024 22:57:58 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   3          #include "port.h"
+   4          #include "C:\hoc\8051\bai_tap\Library\SPI\SPI.h"
+   5          
+   6          unsigned char EEPROM_25LCxxx_WIP();
+   7          void EEPROM_25LCxxx_Write(unsigned int add, unsigned char b);
+   8          unsigned char EEPROM_25LCxxx_Read(unsigned int add);
+   9          
+  10          void main()
+  11          {
+  12   1        unsigned int i;
+  13   1        Soft_SPI_Init(); //khoi tao giao thuc SPI
+  14   1        
+  15   1        /* Gui 1 byte du lieu
+  16   1        EEPROM_25LCxxx_Write(0, 0x01); // ghi du lieu 0x50 len EEPROM tai dia chi 0
+  17   1      
+  18   1        P3 = EEPROM_25LCxxx_Read(0);   // doc du lieu ve tu EEPROM tai dia chi 0 xuat ra port 3
+  19   1        */
+  20   1        
+  21   1        // gui 100 byte du lieu tu 0-99
+  22   1        for(i=0; i<100; i++)
+  23   1        {
+  24   2          EEPROM_25LCxxx_Write(i,i);
+  25   2        }
+  26   1        
+  27   1        while(1)
+  28   1        {
+  29   2          // doc 100 byte du lieu tu EEPROM ve
+  30   2          for(i=0; i<100; i++)
+  31   2          {
+  32   3            P3 = EEPROM_25LCxxx_Read(i);
+  33   3            Delay_ms(500);
+  34   3          }
+  35   2        
+  36   2        }
+  37   1      }
+  38          
+  39          //ghi du lieu sang EEPROM tai dia chi add
+  40          void EEPROM_25LCxxx_Write(unsigned int add, unsigned char b)
+  41          {
+  42   1        //cho phep ghi du lieu len EEPROM
+  43   1        SPI_CS = 0;
+  44   1        Soft_SPI_Write(0x06); //chot cho phep ghi du lieu (WREN)
+  45   1        SPI_CS = 1;
+  46   1        
+  47   1        // ghi du lieu b sang dia chi add tren EEPROM
+  48   1        SPI_CS = 0;
+  49   1        Soft_SPI_Write(0x02);         //cho phep ghi du lieu len EEPROM
+  50   1        Soft_SPI_Write(add>>8);       //gui 8 bit cao cua dia chi add sang EEPROM
+  51   1        Soft_SPI_Write(add & 0x00FF); // gui 8 bit thap cua dia chi add sang EEPROM
+  52   1        Soft_SPI_Write(b);            // ghi du lieu len dia chi add cua EEPROM
+  53   1        SPI_CS = 1;
+  54   1        
+C51 COMPILER V9.60.7.0   MAIN                                                              09/09/2024 22:57:58 PAGE 2   
+
+  55   1        while(EEPROM_25LCxxx_WIP());  // kiem tra bit cuoi cung bang 0 thi la da gui het
+  56   1      }
+  57          
+  58          // kiem tra trang thai cua EEPROM
+  59          unsigned char EEPROM_25LCxxx_WIP()
+  60          {
+  61   1        unsigned char result;
+  62   1        SPI_CS = 0;
+  63   1        Soft_SPI_Write(0x05); // gui bit 0x05 la bit yeu cau kiem tra trang thai sang EEPROM
+  64   1        result = Soft_SPI_Read();
+  65   1        SPI_CS = 1;
+  66   1        return result & 0x01; // tra ve gia tri cua EEPROM_25LCxxx_WIP
+  67   1      }
+  68          
+  69          // doc du lieu tu EEPROM ve tai dia chi add
+  70          unsigned char EEPROM_25LCxxx_Read(unsigned int add)
+  71          {
+  72   1        unsigned char b;
+  73   1        
+  74   1        SPI_CS = 0;
+  75   1        Soft_SPI_Write(0x03);       // cho phep doc du lieu tu EEPROM ve
+  76   1        Soft_SPI_Write(add>>8);     // lay 8 bit cao cua dia chi can doc 
+  77   1        Soft_SPI_Write(add & 0x00FF); //lay 8 bit thap cua dia chi can doc 
+  78   1        b = Soft_SPI_Read();          // doc du lieu tu EEPROM ve tai dia chi add gan vao bien b
+  79   1        SPI_CS = 1;
+  80   1        
+  81   1        return b;
+  82   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    170    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

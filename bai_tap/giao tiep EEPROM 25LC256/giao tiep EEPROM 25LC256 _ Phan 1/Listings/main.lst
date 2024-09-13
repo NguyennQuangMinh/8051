@@ -1,0 +1,60 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/09/2024 23:48:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          // ghi 1 byte du lieu sang EEPROM su dung giao thuc SPI
+   2          
+   3          #include "main.h"
+   4          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   5          #include "C:\hoc\8051\bai_tap\Library\SPI\SPI.h"
+   6          #include "port.h"
+   7          
+   8          //ghi du lieu b sang EEPROM tai dia chi la add
+   9          void EEPROM_25LCxxx_Write(unsigned int add, unsigned char b)
+  10          {
+  11   1        //cho phep ghi du lieu
+  12   1        SPI_CS = 0;
+  13   1        Soft_SPI_Write(0x06);  // dat chot cho phep ghi du lieu (WREN)
+  14   1        SPI_CS = 1;
+  15   1        
+  16   1        //ghi du lieu b sang add
+  17   1        SPI_CS = 0;
+  18   1        Soft_SPI_Write(0x02);         // cho phep gui du lieu
+  19   1        Soft_SPI_Write(add>>8);       //lay 8 bit cao cua dia chi muon luu du lieu len
+  20   1        Soft_SPI_Write(add & 0x00FF); //lay 8 bit thap cua dia chi muon luu du lieu len
+  21   1        Soft_SPI_Write(b);  // gui du lieu sang dia chi muon luu sang EEPROm
+  22   1        SPI_CS = 1;
+  23   1        //moi lan gui du lieu xong can chu y keo SPI_CS len lai muc 0 de biet rang da gui xong 1 du lieu 
+  24   1      }
+  25          void main()
+  26          {
+  27   1        Soft_SPI_Init(); // khoi tao giao thuc SPI
+  28   1        
+  29   1        EEPROM_25LCxxx_Write(0,0x09); //gui du lieu 0x01 sang EEPROM tai dia chi 0
+  30   1        Delay_ms(500);
+  31   1        EEPROM_25LCxxx_Write(1,0x55); // gui du lieu 0x55 sang EEPROM tai dia chi 1
+  32   1        while(1)
+  33   1        {
+  34   2        
+  35   2        }
+  36   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     72    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

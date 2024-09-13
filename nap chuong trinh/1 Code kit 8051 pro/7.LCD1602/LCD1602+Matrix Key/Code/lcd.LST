@@ -1,0 +1,139 @@
+C51 COMPILER V9.60.7.0   LCD                                                               09/09/2024 17:20:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE lcd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include"lcd.h"
+   2          
+   3          
+   4          
+   5          void Lcd1602_Delay1ms(uint c)  
+   6          {
+   7   1          uchar a,b;
+   8   1        for (; c>0; c--)
+   9   1        {
+  10   2           for (b=199;b>0;b--)
+  11   2           {
+  12   3              for(a=1;a>0;a--);
+  13   3           }      
+  14   2        }
+  15   1            
+  16   1      }
+  17          
+  18          #ifndef   LCD1602_4PINS  
+              void LcdWriteCom(uchar com)   
+              {
+                LCD1602_E = 0;     
+                LCD1602_RS = 0;    
+                LCD1602_RW = 0;    
+                
+                LCD1602_DATAPINS = com;     
+                Lcd1602_Delay1ms(1);  
+              
+                LCD1602_E = 1;            
+                Lcd1602_Delay1ms(5);    
+                LCD1602_E = 0;
+              }
+              #else 
+  33          void LcdWriteCom(uchar com)   
+  34          {
+  35   1        LCD1602_E = 0;  
+  36   1        LCD1602_RS = 0;  
+  37   1        LCD1602_RW = 0;  
+  38   1      
+  39   1        LCD1602_DATAPINS = com; 
+  40   1        Lcd1602_Delay1ms(1);
+  41   1      
+  42   1        LCD1602_E = 1;   
+  43   1        Lcd1602_Delay1ms(5);
+  44   1        LCD1602_E = 0;
+  45   1      
+  46   1      //  Lcd1602_Delay1ms(1);
+  47   1        LCD1602_DATAPINS = com << 4; 
+  48   1        Lcd1602_Delay1ms(1);
+  49   1      
+  50   1        LCD1602_E = 1;   
+  51   1        Lcd1602_Delay1ms(5);
+  52   1        LCD1602_E = 0;
+  53   1      }
+  54          #endif
+  55               
+C51 COMPILER V9.60.7.0   LCD                                                               09/09/2024 17:20:40 PAGE 2   
+
+  56          #ifndef   LCD1602_4PINS      
+              void LcdWriteData(uchar dat)      
+              {
+                LCD1602_E = 0;  
+                LCD1602_RS = 1; 
+                LCD1602_RW = 0; 
+              
+                LCD1602_DATAPINS = dat; 
+                Lcd1602_Delay1ms(1);
+              
+                LCD1602_E = 1;   
+                Lcd1602_Delay1ms(5);   
+                LCD1602_E = 0;
+              }
+              #else
+  71          void LcdWriteData(uchar dat)      
+  72          {
+  73   1        LCD1602_E = 0;    
+  74   1        LCD1602_RS = 1;   
+  75   1        LCD1602_RW = 0;   
+  76   1      
+  77   1        LCD1602_DATAPINS = dat; 
+  78   1        Lcd1602_Delay1ms(1);
+  79   1      
+  80   1        LCD1602_E = 1;    
+  81   1        Lcd1602_Delay1ms(5);
+  82   1        LCD1602_E = 0;
+  83   1      
+  84   1        LCD1602_DATAPINS = dat << 4; 
+  85   1        Lcd1602_Delay1ms(1);
+  86   1      
+  87   1        LCD1602_E = 1;    
+  88   1        Lcd1602_Delay1ms(5);
+  89   1        LCD1602_E = 0;
+  90   1      }
+  91          #endif
+  92               
+  93          #ifndef   LCD1602_4PINS
+              void LcdInit()             
+              {
+                LcdWriteCom(0x38);  
+                LcdWriteCom(0x0c); 
+                LcdWriteCom(0x06); 
+                LcdWriteCom(0x01);  
+                LcdWriteCom(0x80);  
+              }
+              #else
+ 103          void LcdInit()              
+ 104          {
+ 105   1        LcdWriteCom(0x32);   
+ 106   1        LcdWriteCom(0x28);   
+ 107   1        LcdWriteCom(0x0c);  
+ 108   1        LcdWriteCom(0x06);  
+ 109   1        LcdWriteCom(0x01);  
+ 110   1        LcdWriteCom(0x80); 
+ 111   1      }
+ 112          #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    120    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V9.60.7.0   LCD                                                               09/09/2024 17:20:40 PAGE 3   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

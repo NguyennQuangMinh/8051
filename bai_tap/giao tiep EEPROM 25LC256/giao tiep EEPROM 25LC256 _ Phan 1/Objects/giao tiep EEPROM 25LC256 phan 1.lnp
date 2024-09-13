@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\SPI.obj" 
+TO ".\Objects\giao tiep EEPROM 25LC256 phan 1" 
+PRINT(".\Listings\giao tiep EEPROM 25LC256 phan 1.m51") RAMSIZE(256) 

@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\ADC0808.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD4.obj" 
+TO ".\Objects\ADC 3 _ ket hop voi ic ADC0808" 
+PRINT(".\Listings\ADC 3 _ ket hop voi ic ADC0808.m51") RAMSIZE(256) 

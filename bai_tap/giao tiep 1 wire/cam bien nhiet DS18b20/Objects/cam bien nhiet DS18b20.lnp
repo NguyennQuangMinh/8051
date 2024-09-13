@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\OneWire.obj",
+".\Objects\T0_Delay_us.obj" 
+TO ".\Objects\cam bien nhiet DS18b20" 
+PRINT(".\Listings\cam bien nhiet DS18b20.m51") RAMSIZE(256) 

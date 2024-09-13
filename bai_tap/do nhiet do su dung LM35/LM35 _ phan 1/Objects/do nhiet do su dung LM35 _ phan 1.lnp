@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\ADC0804.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD4.obj" 
+TO ".\Objects\do nhiet do su dung LM35 _ phan 1" 
+PRINT(".\Listings\do nhiet do su dung LM35 _ phan 1.m51") RAMSIZE(256) 
