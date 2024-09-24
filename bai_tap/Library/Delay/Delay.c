@@ -1,7 +1,7 @@
 #include "Delay.h"
 #include "main.h"
 
-
+// su dung Delay voi thach anh 12Mhz
 #if (FREQ_OSC == 12000000)
 	void Delay_ms(unsigned int t)
 	{
@@ -12,7 +12,7 @@
 		}
 	}
 
-
+// su dung Delay voi thach anh 11.0592Mhz
 #elif (FREQ_OSC == 11059200)
 	void Delay_ms(unsigned int t)
 	{
@@ -23,6 +23,7 @@
 		}
 	}
 
+//su dung Delay voi thach anh 8Mhz
 #elif (FREQ_OSC == 8000000)
 	void Delay_ms(unsigned int t)
 	{
@@ -33,6 +34,7 @@
 		}
 	}
 
+//su dung Delay voi thach anh 4Mhz
 #elif (FREQ_OSC == 4000000)
 	void Delay_ms(unsigned int t)
 	{
@@ -45,5 +47,5 @@
 
 #else
 	#error "Khong co ham Delay_ms voi tan so tuong ung"
-
+	
 #endif

@@ -37,6 +37,5 @@ void main()
 		Lcd_Chr_Cp(voltage%10 + 0x30);
 		
 		Delay_ms(500); //delay tranh man hinh LCD nhap nhay lien tuc
-	
 	}
 }

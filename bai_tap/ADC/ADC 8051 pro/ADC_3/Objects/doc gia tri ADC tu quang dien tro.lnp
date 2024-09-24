@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD4.obj",
+".\Objects\XPT2046.obj" 
+TO ".\Objects\doc gia tri ADC tu quang dien tro" 
+PRINT(".\Listings\doc gia tri ADC tu quang dien tro.m51") RAMSIZE(256) 

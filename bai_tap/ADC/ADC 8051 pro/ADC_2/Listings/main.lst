@@ -1,0 +1,119 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/23/2024 21:04:16 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\hoc\8051\Keil_C_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          // bat led voi gia tri adc tuong ung
+   2          #include "Main.h"
+   3          #include "Port.h"
+   4          #include "C:\hoc\8051\bai_tap\Library\XPT2046\XPT2046.h"
+   5          #include "C:\hoc\8051\bai_tap\Library\LCD16x2_4bit\LCD4.h"
+   6          #include "C:\hoc\8051\bai_tap\Library\Delay\Delay.h"
+   7          #include "String.h"
+   8          
+   9          void main()
+  10          {
+  11   1        unsigned int adc_value, voltage;
+  12   1        LCD_RW = 0;
+  13   1        Lcd_Init();
+  14   1        while(1)
+  15   1        {
+  16   2          // doc gia tri adc
+  17   2          adc_value = Read_AD_Data(0x94);     //AIN0 doc gia tri tu triet ap AD1 tren bo kit8051 pro
+  18   2      //    adc_value = Read_AD_Data(0xD4);   //   AIN1 doc gia tri tu dien tro nhiet NTC1
+  19   2      //    adc_value = Read_AD_Data(0xA4);   //   AIN2 doc gia tri tu quang dien tro
+  20   2      //    adc_value = Read_AD_Data(0xE4);   //   AIN3 doc gia tri tu bo DAC 
+  21   2          Lcd_Out(1, 1, "ADC value: ");
+  22   2          Lcd_Chr_Cp(adc_value/1000 + 0x30);
+  23   2          Lcd_Chr_Cp(adc_value%1000/100 + 0x30);
+  24   2          Lcd_Chr_Cp(adc_value%100/10 + 0x30);
+  25   2          Lcd_Chr_Cp(adc_value%10 + 0x30);
+  26   2          
+  27   2          // doc gia tri voltage tu gia tri ADC
+  28   2          voltage = (unsigned int)adc_value*(5.0/4095.0)*1000 ;
+  29   2          Lcd_Out(2, 1, "voltage: ");
+  30   2          Lcd_Chr_Cp(voltage/1000 + 0x30);
+  31   2          Lcd_Chr_Cp('.');
+  32   2          Lcd_Chr_Cp(voltage%1000/100 + 0x30);
+  33   2          Lcd_Chr_Cp(voltage%100/10 + 0x30);
+  34   2          Lcd_Chr_Cp(voltage%10 + 0x30);
+  35   2          
+  36   2          Delay_ms(500); // chong chop man hinh LCD
+  37   2          
+  38   2          // bat led 1
+  39   2          if(adc_value>682 && adc_value<=1364)
+  40   2          {
+  41   3            P2_0 = 0;
+  42   3            P2_1 = 1;
+  43   3            P2_2 = 1;
+  44   3            P2_3 = 1;
+  45   3            P2_4 = 1;
+  46   3          }
+  47   2          // bat led 1,2
+  48   2          if(adc_value>1364 && adc_value<=2046)
+  49   2          {
+  50   3            P2_0 = 0;
+  51   3            P2_1 = 0;
+  52   3            P2_2 = 1;
+  53   3            P2_3 = 1;
+  54   3            P2_4 = 1;
+C51 COMPILER V9.60.7.0   MAIN                                                              09/23/2024 21:04:16 PAGE 2   
+
+  55   3          }
+  56   2          // bat led 1,2,3
+  57   2          else if(adc_value>2046 && adc_value<=2728)
+  58   2          {
+  59   3            P2_0 = 0;
+  60   3            P2_1 = 0;
+  61   3            P2_2 = 0;
+  62   3            P2_3 = 1;
+  63   3            P2_4 = 1;
+  64   3          }
+  65   2          //bat led 1,2,3,4
+  66   2          else if(adc_value>2728 && adc_value<=3410)
+  67   2          {
+  68   3            P2_0 = 0;
+  69   3            P2_1 = 0;
+  70   3            P2_2 = 0;
+  71   3            P2_3 = 0;
+  72   3            P2_4 = 1;
+  73   3          }
+  74   2          //bat led 1,2,3,4,5
+  75   2          else if(adc_value>3410 && adc_value<=4095)
+  76   2          {
+  77   3            P2_0 = 0;
+  78   3            P2_1 = 0;
+  79   3            P2_2 = 0;
+  80   3            P2_3 = 0;
+  81   3            P2_4 = 0;
+  82   3          }
+  83   2          //tat toan bo led
+  84   2          else
+  85   2          {
+  86   3            P2_0 = 1;
+  87   3            P2_1 = 1;
+  88   3            P2_2 = 1;
+  89   3            P2_3 = 1;
+  90   3            P2_4 = 1;
+  91   3          }
+  92   2        }
+  93   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    454    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

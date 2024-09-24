@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/07/2024 17:01:32 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/22/2024 17:18:02 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -27,7 +27,7 @@ line level    source
   17   1        unsigned int i;
   18   1        while(1)
   19   1        {
-  20   2          //sang dan tu led 0 den led 8
+  20   2          //sang dan tu led 0 den led 7
   21   2          for(i=0; i<8;i++){
   22   3            P2 <<=1; //dich trai 1 lan
   23   3            P2 &= 0xFE; // moi lan dich bit se keo bit thap nhat xuong muc 0 de bat led

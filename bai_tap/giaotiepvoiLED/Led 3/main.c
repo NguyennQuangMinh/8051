@@ -17,7 +17,7 @@ void main()
 	unsigned int i;
 	while(1)
 	{
-		//sang dan tu led 0 den led 8
+		//sang dan tu led 0 den led 7
 		for(i=0; i<8;i++){
 			P2 <<=1; //dich trai 1 lan
 			P2 &= 0xFE; // moi lan dich bit se keo bit thap nhat xuong muc 0 de bat led
